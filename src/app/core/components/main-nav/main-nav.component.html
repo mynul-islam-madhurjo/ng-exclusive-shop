@@ -1,1 +1,22 @@
-<p>main-nav works!</p>
+<nav class="nav">
+  <div class="container nav_container">
+    <a [routerLink]="['/']" class="nav_logo">EXCLUSIVE</a>
+    <ul class="nav_list">
+      <li class="nav_item" *ngFor="let item of navItems">
+        <a
+          [routerLink]="[item.path]"
+          routerLinkActive="activate-link"
+          class="nav_link"
+          >{{ item.label }}</a
+        >
+      </li>
+    </ul>
+    <div class="nav_items">
+      <app-search-bar></app-search-bar>
+      <img src="assets/image/heart.png" alt="Wishlist" class="nav_heart" />
+      <a [routerLink]="['/cart']">
+        <img src="assets/image/cart.png" alt="Cart" class="nav_cart" />
+      </a>
+    </div>
+  </div>
+</nav>
