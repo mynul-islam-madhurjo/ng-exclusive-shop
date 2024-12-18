@@ -1,1 +1,14 @@
-<p>search-bar works!</p>
+<form class="nav_form" (ngSubmit)="onSubmit()">
+  <input
+    type="text"
+    class="nav_input"
+    [formControl]="searchControl"
+    placeholder="Search here...."
+  />
+  <img
+    src="assets/image/search.png"
+    alt="Search"
+    class="nav_search"
+    (click)="onSubmit()"
+  />
+</form>

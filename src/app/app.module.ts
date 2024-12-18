@@ -6,19 +6,17 @@ import { AppComponent } from './app.component';
 import { TopNavComponent } from './core/components/top-nav/top-nav.component';
 import { MainNavComponent } from './core/components/main-nav/main-nav.component';
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     TopNavComponent,
     MainNavComponent,
-    SearchBarComponent
+    SearchBarComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-  ],
+  imports: [BrowserModule, ReactiveFormsModule, AppRoutingModule, FormsModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
