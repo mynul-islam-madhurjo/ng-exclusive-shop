@@ -1,0 +1,21 @@
+<header class="header">
+  <div class="container header_container">
+    <!-- Category Filter Section -->
+    <div class="header_filter">
+      <a
+        *ngFor="let category of categories"
+        [routerLink]="[category.path]"
+        class="header_filter_link"
+        [class.active]="selectedCategory === category.id"
+        (click)="selectCategory(category.id)"
+      >
+        {{ category.name }}
+      </a>
+    </div>
+
+    <!-- Header Image Section -->
+    <div class="header_image_container">
+      <img [src]="headerImagePath" [alt]="headerImageAlt" class="header_img" />
+    </div>
+  </div>
+</header>

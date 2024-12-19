@@ -7,6 +7,7 @@ import { TopNavComponent } from './core/components/top-nav/top-nav.component';
 import { MainNavComponent } from './core/components/main-nav/main-nav.component';
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HeaderComponent } from './core/components/header/header.component';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     TopNavComponent,
     MainNavComponent,
     SearchBarComponent,
+    HeaderComponent,
   ],
   imports: [BrowserModule, ReactiveFormsModule, AppRoutingModule, FormsModule],
   providers: [],

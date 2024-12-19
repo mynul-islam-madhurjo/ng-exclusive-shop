@@ -2,9 +2,21 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  template: `
+    <app-top-nav></app-top-nav>
+    <app-main-nav></app-main-nav>
+    <main class="main-content">
+      <router-outlet></router-outlet>
+      <app-header></app-header>
+    </main>
+  `,
+  styles: [
+    `
+      .main-content {
+        min-height: calc(100vh - 12rem);
+        padding: 2rem 0;
+      }
+    `,
+  ],
 })
-export class AppComponent {
-  title = 'ng-exclusive-shop';
-}
+export class AppComponent {}
