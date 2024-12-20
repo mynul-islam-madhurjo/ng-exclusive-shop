@@ -6,8 +6,9 @@ import { Component } from '@angular/core';
     <app-top-nav></app-top-nav>
     <app-main-nav></app-main-nav>
     <main class="main-content">
-      <router-outlet></router-outlet>
       <app-header></app-header>
+      <app-flash-sale></app-flash-sale>
+      <router-outlet></router-outlet>
     </main>
   `,
   styles: [

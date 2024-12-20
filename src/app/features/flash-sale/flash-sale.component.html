@@ -1,0 +1,53 @@
+<section class="section">
+  <div class="container">
+    <!-- Category Label -->
+    <div class="section_category">
+      <p class="section_category_p">Today's</p>
+    </div>
+
+    <!-- Header with Timer -->
+    <div class="section_header">
+      <h3 class="section_title">Flash Sales</h3>
+      <app-timer [endDate]="endDate"></app-timer>
+    </div>
+
+    <!-- Product Slider -->
+    <div class="product-slider" #sliderContainer>
+      <div
+        class="slider-track"
+        [style.transform]="'translateX(' + -currentSlide * slideWidth + 'px)'"
+      >
+        <div *ngFor="let product of products" class="product-slide">
+          <app-product-card
+            [product]="product"
+            (wishlistClick)="onWishlistToggle(product)"
+            (addToCartClick)="onAddToCart(product)"
+            (quickViewClick)="onQuickView(product)"
+          >
+          </app-product-card>
+        </div>
+      </div>
+
+      <!-- Navigation Buttons -->
+      <button
+        class="nav-btn prev"
+        (click)="slide('prev')"
+        [disabled]="currentSlide === 0"
+      >
+        <i class="fa-solid fa-chevron-left"></i>
+      </button>
+      <button
+        class="nav-btn next"
+        (click)="slide('next')"
+        [disabled]="currentSlide >= maxSlide"
+      >
+        <i class="fa-solid fa-chevron-right"></i>
+      </button>
+    </div>
+
+    <!-- View All Button -->
+    <div class="container_btn">
+      <a routerLink="/products" class="container_btn_a"> View All Products </a>
+    </div>
+  </div>
+</section>

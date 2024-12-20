@@ -8,6 +8,8 @@ import { MainNavComponent } from './core/components/main-nav/main-nav.component'
 import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './core/components/header/header.component';
+import { SharedModule } from './shared/shared.module';
+import { FlashSaleModule } from './features/flash-sale/flash-sale.module';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,14 @@ import { HeaderComponent } from './core/components/header/header.component';
     SearchBarComponent,
     HeaderComponent,
   ],
-  imports: [BrowserModule, ReactiveFormsModule, AppRoutingModule, FormsModule],
+  imports: [
+    BrowserModule,
+    ReactiveFormsModule,
+    AppRoutingModule,
+    FormsModule,
+    SharedModule,
+    FlashSaleModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card_top">
+    <img [src]="product.image" [alt]="product.title" class="card_img" />
+    <div class="card_tag">-{{ product.discount }}%</div>
+    <div class="card_top_icons">
+      <button class="icon-button" (click)="onWishlist()">
+        <i
+          [class.fa-solid]="isInWishlist"
+          [class.fa-regular]="!isInWishlist"
+          class="fa-heart"
+        ></i>
+      </button>
+      <button class="icon-button" (click)="onQuickView()">
+        <i class="fa-regular fa-eye"></i>
+      </button>
+    </div>
+  </div>
+
+  <div class="card_body">
+    <h3 class="card_title">{{ product.title }}</h3>
+    <div class="price-group">
+      <span class="current-price">${{ product.currentPrice }}</span>
+      <span class="original-price">${{ product.originalPrice }}</span>
+    </div>
+    <div class="rating">
+      <div class="stars">
+        <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+          <i
+            [class.fa-solid]="star <= product.rating"
+            [class.fa-regular]="star > product.rating"
+            class="fa-star"
+          ></i>
+        </ng-container>
+      </div>
+      <span class="rating-count">({{ product.ratingCount }})</span>
+    </div>
+    <button class="add-to-cart" (click)="onAddToCart()">Add To Cart</button>
+  </div>
+</div>
