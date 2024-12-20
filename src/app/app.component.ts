@@ -10,6 +10,8 @@ import { Component } from '@angular/core';
       <app-flash-sale></app-flash-sale>
       <app-product-list></app-product-list>
       <app-product-gallery></app-product-gallery>
+      <app-services-section></app-services-section>
+      <app-footer></app-footer>
       <router-outlet></router-outlet>
     </main>
   `,

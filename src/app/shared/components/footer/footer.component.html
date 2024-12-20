@@ -1,0 +1,33 @@
+<footer class="footer">
+  <div class="container footer_container">
+    <div class="footer_item">
+      <a href="#" class="footer_logo">Exclusive</a>
+      <div class="footer_p">
+        Subscribe to our newsletter for daily updates and offers
+        <div class="social-links">
+          <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer_item" *ngFor="let section of footerLinks">
+      <h3 class="footer_item_title">{{ section.title }}</h3>
+      <ul class="footer_list">
+        <li class="footer_list_item" *ngFor="let link of section.links">
+          <a [href]="link.url">{{ link.text }}</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer_bottom">
+    <div class="container footer_bottom_container">
+      <p class="footer_copy">
+        Copyright © {{ currentYear }} Exclusive. All rights reserved
+      </p>
+    </div>
+  </div>
+</footer>
