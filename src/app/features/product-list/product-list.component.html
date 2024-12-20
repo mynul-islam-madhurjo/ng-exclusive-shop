@@ -1,0 +1,64 @@
+<section class="section">
+  <div class="container">
+    <!-- Section Header -->
+    <div class="section_category">
+      <p class="section_category_p">Our Products</p>
+    </div>
+    <div class="section_header">
+      <h3 class="section_title">Explore Our Products</h3>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="products">
+      <div *ngFor="let product of products" class="card">
+        <div class="card_top">
+          <img [src]="product.image" [alt]="product.title" class="card_img" />
+          <!-- Action Icons -->
+          <div class="card_top_icons">
+            <button
+              class="icon-button"
+              (click)="toggleWishlist(product.id)"
+              [class.active]="product.isWishlisted"
+            >
+              <i
+                class="fa-heart"
+                [class.fa-regular]="!product.isWishlisted"
+                [class.fa-solid]="product.isWishlisted"
+              >
+              </i>
+            </button>
+            <button class="icon-button" (click)="quickView(product.id)">
+              <i class="fa-regular fa-eye"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Product Info -->
+        <div class="card_body">
+          <h3 class="card_title">{{ product.title }}</h3>
+          <p class="card_price">${{ product.price }}</p>
+
+          <!-- Rating Stars -->
+          <div class="card_ratings">
+            <div class="card_stars">
+              <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+                <i
+                  class="fa-star"
+                  [class.fa-solid]="star <= product.rating"
+                  [class.fa-regular]="star > product.rating"
+                >
+                </i>
+              </ng-container>
+            </div>
+            <p class="card_rating_numbers">({{ product.ratingCount }})</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- View All Button -->
+    <div class="container_btn">
+      <a routerLink="/products" class="container_btn_a"> VIEW ALL PRODUCTS </a>
+    </div>
+  </div>
+</section>

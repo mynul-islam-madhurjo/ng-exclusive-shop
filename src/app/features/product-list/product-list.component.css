@@ -1,0 +1,175 @@
+.section {
+  margin-top: 10rem;
+}
+
+.section_category_p {
+  border-left: 1.4rem solid var(--color-primary);
+  padding-left: 1.5rem;
+  margin-bottom: 1.5rem;
+  color: var(--color-primary);
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+.section_header {
+  margin-bottom: 4rem;
+}
+
+.section_title {
+  font-size: 2.6rem;
+  font-weight: 600;
+  color: var(--color-dark-1);
+}
+
+/* Products Grid */
+.products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+/* Product Card */
+.card {
+  background: var(--color-white-1);
+  border-radius: 0.8rem;
+  overflow: hidden;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card_top {
+  position: relative;
+  width: 100%;
+  height: 22rem;
+  overflow: hidden;
+}
+
+.card_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.card:hover .card_img {
+  transform: scale(1.05);
+}
+
+.card_top_icons {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  opacity: 0;
+  transform: translateX(10px);
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease;
+}
+
+.card:hover .card_top_icons {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.icon-button {
+  width: 3.4rem;
+  height: 3.4rem;
+  border-radius: 50%;
+  background: var(--color-white-1);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.icon-button:hover,
+.icon-button.active {
+  background: var(--color-primary);
+  color: var(--color-white-1);
+}
+
+.card_body {
+  padding: 1.5rem;
+}
+
+.card_title {
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  color: var(--color-dark-1);
+}
+
+.card_price {
+  font-size: 1.6rem;
+  color: var(--color-primary);
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.card_ratings {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.card_stars {
+  display: flex;
+  gap: 0.2rem;
+  color: #ffd700;
+}
+
+.card_rating_numbers {
+  color: var(--color-dark-2);
+}
+
+/* View All Button */
+.container_btn {
+  text-align: center;
+}
+
+.container_btn_a {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: var(--color-white-1);
+  padding: 1.6rem 3rem;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.container_btn_a:hover {
+  background-color: darken(var(--color-primary), 10%);
+  transform: translateY(-2px);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .section {
+    margin-top: 5rem;
+  }
+
+  .products {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .products {
+    grid-template-columns: 1fr;
+  }
+
+  .card_top {
+    height: 18rem;
+  }
+}
