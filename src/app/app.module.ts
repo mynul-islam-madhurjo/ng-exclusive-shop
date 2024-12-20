@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './core/components/header/header.component';
 import { SharedModule } from './shared/shared.module';
 import { FlashSaleModule } from './features/flash-sale/flash-sale.module';
+import { ProductGalleryModule } from './features/product-gallery/product-gallery.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { FlashSaleModule } from './features/flash-sale/flash-sale.module';
     FormsModule,
     SharedModule,
     FlashSaleModule,
+    ProductGalleryModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,0 +1,30 @@
+<section class="section">
+  <div class="container">
+    <div class="section_category">
+      <p class="section_category_p">Featured</p>
+    </div>
+    <div class="section_header">
+      <h3 class="section_title">New Arrivals</h3>
+    </div>
+    <div class="gallery">
+      <div
+        *ngFor="let product of galleryProducts"
+        [class]="'gallery_item ' + product.gridClass"
+      >
+        <img
+          [src]="product.image"
+          [alt]="product.title"
+          class="gallery_item_img"
+        />
+        <div class="gallery_item_content">
+          <h3 class="gallery_item_title">{{ product.title }}</h3>
+          <p class="gallery_item_p">{{ product.description }}</p>
+          <a [routerLink]="product.link" class="gallery_item_link">
+            SHOP NOW
+            <i class="fa-solid fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
