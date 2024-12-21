@@ -9,32 +9,53 @@ This document outlines the structure and organization of our Angular application
 src/
 ├── app/                          # Root application directory
 │   ├── core/                     # Core module (singleton services, models)
-│   │   ├── models/              # Data models and interfaces
-│   │   │   ├── product.model.ts # Product interface/model
-│   │   │   └── timer.model.ts   # Timer interface/model
-│   │   └── services/            # Application-wide services
-│   │       ├── cart.service.ts  # Shopping cart service
-│   │       └── wishlist.service.ts # Wishlist management service
-│   │
-│   ├── shared/                  # Shared module (common components, directives)
-│   │   ├── components/          # Reusable components
-│   │   │   ├── product-card/    # Product card component
-│   │   │   │   ├── product-card.component.ts
-│   │   │   │   └── product-card.component.css
-│   │   │   └── timer/          # Timer component
-│   │   │       ├── timer.component.ts
-│   │   │       └── timer.component.css
-│   │   └── shared.module.ts     # Shared module configuration
+│   │   ├── components/          # Core components
+│   │   │   ├── header/         # Header component
+│   │   │   ├── main-nav/       # Main navigation component
+│   │   │   └── top-nav/        # Top navigation component
+│   │   ├── models/             # Data models and interfaces
+│   │   │   ├── category.model.ts
+│   │   │   ├── footer-link.model.ts
+│   │   │   ├── nav.model.ts
+│   │   │   ├── product.model.ts
+│   │   │   ├── service.model.ts
+│   │   │   └── timer.model.ts
+│   │   └── services/           # Application-wide services
+│   │       ├── cart.service.ts
+│   │       └── wishlist.service.ts
 │   │
 │   ├── features/               # Feature modules
-│   │   └── flash-sale/        # Flash sale feature module
-│   │       ├── flash-sale.component.ts
-│   │       ├── flash-sale.component.css
-│   │       └── flash-sale.module.ts
+│   │   ├── flash-sale/        # Flash sale feature
+│   │   ├── product-gallery/   # Product gallery feature
+│   │   └── product-list/      # Product list feature
 │   │
-│   ├── app.module.ts          # Root module
+│   ├── shared/                # Shared module
+│   │   ├── components/        # Reusable components
+│   │   │   ├── footer/       # Footer component
+│   │   │   ├── product-card/ # Product card component
+│   │   │   ├── search-bar/   # Search bar component
+│   │   │   ├── services-section/ # Services section component
+│   │   │   └── timer/        # Timer component
+│   │   └── shared.module.ts   # Shared module configuration
+│   │
 │   ├── app.component.ts       # Root component
+│   ├── app.component.html     # Root component template
+│   ├── app.component.css      # Root component styles
+│   ├── app.component.spec.ts  # Root component tests
+│   ├── app.module.ts          # Root module
 │   └── app-routing.module.ts  # Root routing configuration
+│
+└── assets/                    # Static assets
+    └── image/                 # Image assets
+        ├── gallery/          # Gallery images
+        ├── icons/           # Icon assets
+        ├── items/           # Item images
+        ├── auth-image.png
+        ├── cart.png
+        ├── header.png
+        ├── heart.png
+        ├── search.png
+        └── speaker.png
 ```
 
 ## Directory Purposes

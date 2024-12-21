@@ -1,0 +1,134 @@
+<div class="product-details-container" *ngIf="product">
+  <div class="container">
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+      <a routerLink="/account">Account</a>
+      <span>/</span>
+      <a routerLink="/gaming">Gaming</a>
+      <span>/</span>
+      <span class="current">{{ product.title }}</span>
+    </div>
+
+    <div class="product-content">
+      <!-- Product Images -->
+      <div
+        class="product-images"
+        *ngIf="product.images && product.images.length > 0"
+      >
+        <div class="thumbnail-list">
+          <ng-container *ngFor="let image of product.images; let i = index">
+            <div
+              class="thumbnail"
+              [class.active]="selectedImageIndex === i"
+              (click)="selectImage(i)"
+            >
+              <img [src]="image" [alt]="product.title" />
+            </div>
+          </ng-container>
+        </div>
+        <div class="main-image">
+          <img
+            [src]="product.images[selectedImageIndex]"
+            [alt]="product.title"
+          />
+        </div>
+      </div>
+
+      <!-- Product Info -->
+      <div class="product-info">
+        <h1 class="product-title">{{ product.title }}</h1>
+
+        <!-- Rating -->
+        <div class="rating-section">
+          <div class="stars">
+            <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
+              <i
+                class="fa-star"
+                [class.fa-solid]="star <= product.rating"
+                [class.fa-regular]="star > product.rating"
+              >
+              </i>
+            </ng-container>
+          </div>
+          <span class="rating-count">({{ product.ratingCount }} Reviews)</span>
+          <span class="rating-divider">|</span>
+          <span class="in-stock">In Stock</span>
+        </div>
+
+        <!-- Price -->
+        <div class="price-section" *ngIf="product.price">
+          <span class="price">${{ product.price }}</span>
+        </div>
+
+        <!-- Description -->
+        <p class="product-description" *ngIf="product.description">
+          {{ product.description }}
+        </p>
+
+        <!-- Colors -->
+        <div class="colors-section" *ngIf="product.colors?.length">
+          <label>Colours:</label>
+          <div class="color-options">
+            <button
+              *ngFor="let color of product.colors"
+              [style.background-color]="color"
+              [class.selected]="selectedColor === color"
+              (click)="selectColor(color)"
+              class="color-option"
+            ></button>
+          </div>
+        </div>
+
+        <!-- Sizes -->
+        <div class="sizes-section" *ngIf="product?.sizes?.length">
+          <label>Size:</label>
+          <div class="size-options">
+            <button
+              *ngFor="let size of product?.sizes"
+              [class.selected]="selectedSize === size"
+              (click)="selectSize(size)"
+              class="size-option"
+            >
+              {{ size }}
+            </button>
+          </div>
+        </div>
+
+        <!-- Add to Cart Section -->
+        <div class="add-to-cart-section">
+          <div class="quantity-selector">
+            <button (click)="decreaseQuantity()">-</button>
+            <input type="number" [value]="quantity" readonly />
+            <button (click)="increaseQuantity()">+</button>
+          </div>
+          <button class="buy-now-btn" (click)="buyNow()">Buy Now</button>
+          <button
+            class="wishlist-btn"
+            [class.active]="isInWishlist$ | async"
+            (click)="toggleWishlist()"
+          >
+            <i class="fa-regular fa-heart"></i>
+          </button>
+        </div>
+
+        <!-- Delivery Info -->
+        <div class="delivery-info">
+          <div class="delivery-item">
+            <i class="fa-solid fa-truck"></i>
+            <div class="delivery-text">
+              <h4>Free Delivery</h4>
+              <p>Enter your postal code for Delivery Availability</p>
+            </div>
+          </div>
+          <div class="delivery-item">
+            <i class="fa-solid fa-rotate-left"></i>
+            <div class="delivery-text">
+              <h4>Return Delivery</h4>
+              <p>Free 30 Days Delivery Returns. Details</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

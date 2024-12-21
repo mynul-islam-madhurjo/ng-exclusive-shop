@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
       <app-product-list></app-product-list>
       <app-product-gallery></app-product-gallery>
       <app-services-section></app-services-section>
+      <app-product-page></app-product-page>
       <app-footer></app-footer>
       <router-outlet></router-outlet>
     </main>

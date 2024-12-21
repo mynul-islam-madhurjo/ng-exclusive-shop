@@ -12,6 +12,7 @@ import { SharedModule } from './shared/shared.module';
 import { FlashSaleModule } from './features/flash-sale/flash-sale.module';
 import { ProductGalleryModule } from './features/product-gallery/product-gallery.module';
 import { ProductListModule } from './features/product-list/product-list.module';
+import { ProductPageComponent } from './features/product-page/product-page.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ProductListModule } from './features/product-list/product-list.module';
     MainNavComponent,
     SearchBarComponent,
     HeaderComponent,
+    ProductPageComponent,
   ],
   imports: [
     BrowserModule,
