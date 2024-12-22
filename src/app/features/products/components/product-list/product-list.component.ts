@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { CartService } from '../../../cart/services/cart.service';
 
 interface Product {
   id: number;
@@ -131,7 +132,7 @@ export class ProductListComponent {
       ratingCount: 88,
     },
   ];
-
+  constructor(private cartService: CartService) {}
   toggleWishlist(productId: number): void {
     const product = this.products.find((p) => p.id === productId);
     if (product) {
@@ -141,5 +142,17 @@ export class ProductListComponent {
 
   quickView(productId: number): void {
     console.log('Quick view:', productId);
+  }
+
+  onAddToCart(product: Product) {
+    this.cartService.addToCart(product);
+
+    const productToUpdate = this.products.find((p) => p.id === product.id);
+    if (productToUpdate) {
+      productToUpdate.addedToCart = true;
+      setTimeout(() => {
+        productToUpdate.addedToCart = false;
+      }, 2000);
+    }
   }
 }

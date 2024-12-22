@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { CartService } from '../../../../core/services/cart.service';
 import { WishlistService } from '../../../../core/services/wishlist.service';
+import { CartService } from '../../../cart/services/cart.service';
 
 interface Product {
   id: number;
@@ -101,8 +101,6 @@ export class ProductPageComponent implements OnInit {
   }
 
   toggleWishlist() {
-    if (this.product) {
-      // this.wishlistService.toggleWishlist(this.product);
-    }
+    console.log();
   }
 }

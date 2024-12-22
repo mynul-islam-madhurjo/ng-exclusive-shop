@@ -52,6 +52,13 @@
             </div>
             <p class="card_rating_numbers">({{ product.ratingCount }})</p>
           </div>
+          <button
+            class="add-to-cart"
+            (click)="onAddToCart(product)"
+            [disabled]="product.addedToCart"
+          >
+            {{ product.addedToCart ? "Added!" : "Add To Cart" }}
+          </button>
         </div>
       </div>
     </div>

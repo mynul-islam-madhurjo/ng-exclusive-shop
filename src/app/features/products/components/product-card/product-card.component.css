@@ -164,10 +164,11 @@
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  opacity: 1;
 }
 
 .add-to-cart:hover {
-  background: darken(var(--color-primary), 10%);
+  opacity: 0.9;
 }
 
 /* Responsive styles */
