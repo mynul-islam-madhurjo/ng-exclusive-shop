@@ -6,15 +6,9 @@ import { Component } from '@angular/core';
     <app-top-nav></app-top-nav>
     <app-main-nav></app-main-nav>
     <main class="main-content">
-      <app-header></app-header>
-      <app-flash-sale></app-flash-sale>
-      <app-product-list></app-product-list>
-      <app-product-gallery></app-product-gallery>
-      <app-services-section></app-services-section>
-      <app-product-page></app-product-page>
-      <app-footer></app-footer>
       <router-outlet></router-outlet>
     </main>
+    <app-footer></app-footer>
   `,
   styles: [
     `

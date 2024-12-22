@@ -1,7 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { interval, Subscription } from 'rxjs';
-import { Product } from '../../core/models/product.model';
-import { Timer } from '../../core/models/timer.model';
+
+interface Product {
+  id: number;
+  title: string;
+  currentPrice: number;
+  originalPrice: number;
+  discount: number;
+  image: string;
+  rating: number;
+  ratingCount: number;
+  isInWishlist?: boolean;
+}
 
 @Component({
   selector: 'app-flash-sale',

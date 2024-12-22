@@ -1,38 +1,13 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { TopNavComponent } from './core/components/top-nav/top-nav.component';
-import { MainNavComponent } from './core/components/main-nav/main-nav.component';
-import { SearchBarComponent } from './shared/components/search-bar/search-bar.component';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HeaderComponent } from './core/components/header/header.component';
+import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
-import { FlashSaleModule } from './features/flash-sale/flash-sale.module';
-import { ProductGalleryModule } from './features/product-gallery/product-gallery.module';
-import { ProductListModule } from './features/product-list/product-list.module';
-import { ProductPageComponent } from './features/product-page/product-page.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    TopNavComponent,
-    MainNavComponent,
-    SearchBarComponent,
-    HeaderComponent,
-    ProductPageComponent,
-  ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-    FormsModule,
-    SharedModule,
-    FlashSaleModule,
-    ProductGalleryModule,
-    ProductListModule,
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, CoreModule, SharedModule],
   providers: [],
   bootstrap: [AppComponent],
 })
