@@ -143,6 +143,18 @@
   text-align: center;
 }
 
+.button-loader {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  /*border: 2px solid rgba(255, 255, 255, 0.3);*/
+  border-radius: 50%;
+  border-top-color: #fff;
+  animation: spin 1s ease-in-out infinite;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
 .container_btn_a {
   display: inline-block;
   background-color: var(--color-primary);
@@ -195,6 +207,13 @@
   height: 40px;
   animation: spin 1s linear infinite;
   margin: 0 auto 1rem;
+}
+
+.all-loaded-text {
+  color: var(--color-dark-2);
+  font-size: 1.4rem;
+  text-align: center;
+  margin: 2rem 0;
 }
 
 @keyframes spin {

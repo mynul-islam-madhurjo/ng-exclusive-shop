@@ -11,8 +11,11 @@ import { Router } from '@angular/router';
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
-  loading = true;
+  loading = false;
   error = '';
+  currentPage = 0;
+  productsPerLoad = 8;
+  allProductsLoaded = false;
 
   constructor(
     private productService: ProductService,
@@ -21,24 +24,33 @@ export class ProductListComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.loadProducts();
+    this.loadMoreProducts();
   }
 
-  loadProducts() {
+  loadMoreProducts() {
+    if (this.loading || this.allProductsLoaded) return;
+
     this.loading = true;
-    this.productService.getProducts().subscribe({
-      next: (products) => {
-        this.products = products;
-        this.loading = false;
-      },
-      error: (error) => {
-        this.error = 'Failed to load products. Please try again later.';
-        this.loading = false;
-        console.error('Error loading products:', error);
-      },
-    });
-  }
+    const startAfter = this.currentPage * this.productsPerLoad;
 
+    this.productService
+      .getProducts(this.productsPerLoad, startAfter)
+      .subscribe({
+        next: (newProducts) => {
+          if (newProducts.length < this.productsPerLoad) {
+            this.allProductsLoaded = true;
+          }
+          this.products = [...this.products, ...newProducts];
+          this.currentPage++;
+          this.loading = false;
+        },
+        error: (error) => {
+          this.error = 'Failed to load products. Please try again later.';
+          this.loading = false;
+          console.error('Error loading products:', error);
+        },
+      });
+  }
   toggleWishlist(productId: number): void {
     const product = this.products.find((p) => p.id === productId);
     if (product) {

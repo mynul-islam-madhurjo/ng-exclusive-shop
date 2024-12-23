@@ -8,7 +8,7 @@
     </div>
 
     <!-- Loading State -->
-    <div *ngIf="loading" class="loading-state">
+    <div *ngIf="loading && !products.length" class="loading-state">
       <div class="loader"></div>
       <p>Loading products...</p>
     </div>
@@ -16,11 +16,13 @@
     <!-- Error State -->
     <div *ngIf="error" class="error-state">
       <p>{{ error }}</p>
-      <button (click)="loadProducts()" class="retry-button">Try Again</button>
+      <button (click)="loadMoreProducts()" class="retry-button">
+        Try Again
+      </button>
     </div>
 
     <!-- Products Grid -->
-    <div class="products" *ngIf="!loading && !error">
+    <div class="products" *ngIf="products.length > 0">
       <div *ngFor="let product of products" class="card">
         <div class="card_top" (click)="onProductClick(product.id)">
           <img [src]="product.image" [alt]="product.title" class="card_img" />
@@ -69,11 +71,26 @@
       </div>
     </div>
 
-    <!-- View All Button -->
-    <div class="container_btn" *ngIf="!loading && !error">
-      <a routerLink="/products/list" class="container_btn_a"
-        >VIEW ALL PRODUCTS</a
-      >
+    <!-- Load More Section -->
+    <div class="container_btn" *ngIf="products.length > 0 && !error">
+      <ng-container *ngIf="!allProductsLoaded; else allLoaded">
+        <button
+          (click)="loadMoreProducts()"
+          class="container_btn_a"
+          [disabled]="loading"
+        >
+          <ng-container *ngIf="!loading; else loadingMore">
+            LOAD MORE PRODUCTS
+          </ng-container>
+          <ng-template #loadingMore>
+            <div class="button-loader"></div>
+            LOADING...
+          </ng-template>
+        </button>
+      </ng-container>
+      <ng-template #allLoaded>
+        <p class="all-loaded-text">No more products to load</p>
+      </ng-template>
     </div>
   </div>
 </section>

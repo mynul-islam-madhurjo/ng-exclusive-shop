@@ -11,8 +11,13 @@ export class ProductService {
 
   constructor(private http: HttpClient) {}
 
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(this.apiUrl);
+  getProducts(
+    limit: number = 8,
+    startAfter: number = 0,
+  ): Observable<Product[]> {
+    return this.http
+      .get<Product[]>(this.apiUrl)
+      .pipe(map((products) => products.slice(startAfter, startAfter + limit)));
   }
 
   getProduct(id: number): Observable<Product> {
