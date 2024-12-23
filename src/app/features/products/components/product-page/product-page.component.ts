@@ -1,26 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { WishlistService } from '../../../../core/services/wishlist.service';
 import { CartService } from '../../../cart/services/cart.service';
-
-interface Product {
-  id: number;
-  title: string;
-  price?: number;
-  currentPrice?: number;
-  originalPrice?: number;
-  discount?: number;
-  rating: number;
-  ratingCount: number;
-  description?: string;
-  image?: string;
-  images?: string[];
-  colors?: string[];
-  sizes?: string[];
-  isWishlisted?: boolean;
-}
+import { Product } from '../../models/product.model';
+import { ProductService } from '../../services/prdouct.service';
 
 @Component({
   selector: 'app-product-page',
@@ -29,16 +14,19 @@ interface Product {
 })
 export class ProductPageComponent implements OnInit {
   product: Product | null = null;
-  selectedImageIndex = 0;
   selectedColor: string | null = null;
   selectedSize: string | null = null;
   quantity = 1;
   isInWishlist$: Observable<boolean>;
+  loading = true;
+  error = '';
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private cartService: CartService,
     private wishlistService: WishlistService,
+    private productService: ProductService,
   ) {
     this.isInWishlist$ = this.wishlistService.wishlistItems$.pipe(
       map((items) => items.some((item) => item.id === this.product?.id)),
@@ -47,33 +35,44 @@ export class ProductPageComponent implements OnInit {
 
   ngOnInit() {
     this.route.params.subscribe((params) => {
-      const id = params['id'];
+      const id = +params['id'];
       this.loadProduct(id);
     });
   }
 
-  loadProduct(id: string) {
-    this.product = {
-      id: 1,
-      title: 'Havic HV G-92 Gamepad',
-      price: 192.0,
-      rating: 4.5,
-      ratingCount: 150,
-      description:
-        'PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal',
-      colors: ['#000000', '#FF0000'],
-      sizes: ['XS', 'S', 'M', 'L', 'XL'],
-      images: [
-        'assets/image/items/item-1.png',
-        'assets/image/items/item-2.png',
-        'assets/image/items/item-3.png',
-        'assets/image/items/item-4.png',
-      ],
-    };
+  loadProduct(id: number) {
+    this.loading = true;
+    this.error = '';
+    this.productService.getProduct(id).subscribe({
+      next: (product) => {
+        this.product = {
+          ...product,
+          colors: ['#000000', '#FF0000'],
+          sizes: ['XS', 'S', 'M', 'L', 'XL'],
+        };
+        this.loading = false;
+      },
+      error: (error) => {
+        console.error('Error loading product:', error);
+        this.error = 'Failed to load product. Please try again later.';
+        this.loading = false;
+      },
+    });
   }
 
-  selectImage(index: number) {
-    this.selectedImageIndex = index;
+  onAddToCart() {
+    if (this.product) {
+      const cartProduct = {
+        id: this.product.id,
+        title: this.product.title,
+        price: this.product.price,
+        image: this.product.image,
+        rating: this.product.rating.rate,
+        ratingCount: this.product.rating.count,
+        quantity: this.quantity,
+      };
+      this.cartService.addToCart(cartProduct);
+    }
   }
 
   selectColor(color: string) {
@@ -96,11 +95,14 @@ export class ProductPageComponent implements OnInit {
 
   buyNow() {
     if (this.product) {
-      console.log('Buy Now:', this.product);
+      this.onAddToCart();
+      this.router.navigate(['/cart']);
     }
   }
 
   toggleWishlist() {
-    console.log();
+    if (this.product) {
+      // this.wishlistService.toggleWishlistItem(this.product);
+    }
   }
 }

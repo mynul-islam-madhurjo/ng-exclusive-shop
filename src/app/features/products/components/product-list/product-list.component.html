@@ -22,7 +22,7 @@
     <!-- Products Grid -->
     <div class="products" *ngIf="!loading && !error">
       <div *ngFor="let product of products" class="card">
-        <div class="card_top">
+        <div class="card_top" (click)="onProductClick(product.id)">
           <img [src]="product.image" [alt]="product.title" class="card_img" />
           <div class="card_top_icons">
             <button
@@ -59,7 +59,7 @@
             <p class="card_rating_numbers">({{ product.rating.count }})</p>
           </div>
           <button
-            class="add-to-cart"
+            class="add-to-cart icon-button"
             (click)="onAddToCart(product)"
             [disabled]="product.addedToCart"
           >
@@ -71,7 +71,7 @@
 
     <!-- View All Button -->
     <div class="container_btn" *ngIf="!loading && !error">
-      <a routerLink="/products/products-list" class="container_btn_a"
+      <a routerLink="/products/list" class="container_btn_a"
         >VIEW ALL PRODUCTS</a
       >
     </div>

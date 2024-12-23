@@ -1,4 +1,15 @@
-<div class="product-details-container" *ngIf="product">
+<!-- Loading State -->
+<div *ngIf="loading" class="loading-state">
+  <div class="loader"></div>
+  <p>Loading product details...</p>
+</div>
+
+<!-- Error State -->
+<div *ngIf="error" class="error-state">
+  <p>{{ error }}</p>
+</div>
+
+<div class="product-details-container" *ngIf="!loading && !error && product">
   <div class="container">
     <!-- Breadcrumb -->
     <div class="breadcrumb">
@@ -10,27 +21,10 @@
     </div>
 
     <div class="product-content">
-      <!-- Product Images -->
-      <div
-        class="product-images"
-        *ngIf="product.images && product.images.length > 0"
-      >
-        <div class="thumbnail-list">
-          <ng-container *ngFor="let image of product.images; let i = index">
-            <div
-              class="thumbnail"
-              [class.active]="selectedImageIndex === i"
-              (click)="selectImage(i)"
-            >
-              <img [src]="image" [alt]="product.title" />
-            </div>
-          </ng-container>
-        </div>
+      <!-- Product Image -->
+      <div class="product-images">
         <div class="main-image">
-          <img
-            [src]="product.images[selectedImageIndex]"
-            [alt]="product.title"
-          />
+          <img [src]="product.image" [alt]="product.title" />
         </div>
       </div>
 
@@ -44,24 +38,25 @@
             <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
               <i
                 class="fa-star"
-                [class.fa-solid]="star <= product.rating"
-                [class.fa-regular]="star > product.rating"
-              >
-              </i>
+                [class.fa-solid]="star <= (product.rating?.rate || 0)"
+                [class.fa-regular]="star > (product.rating?.rate || 0)"
+              ></i>
             </ng-container>
           </div>
-          <span class="rating-count">({{ product.ratingCount }} Reviews)</span>
+          <span class="rating-count"
+            >({{ product.rating?.count || 0 }} Reviews)</span
+          >
           <span class="rating-divider">|</span>
           <span class="in-stock">In Stock</span>
         </div>
 
         <!-- Price -->
-        <div class="price-section" *ngIf="product.price">
+        <div class="price-section">
           <span class="price">${{ product.price }}</span>
         </div>
 
         <!-- Description -->
-        <p class="product-description" *ngIf="product.description">
+        <p class="product-description">
           {{ product.description }}
         </p>
 
@@ -80,11 +75,11 @@
         </div>
 
         <!-- Sizes -->
-        <div class="sizes-section" *ngIf="product?.sizes?.length">
+        <div class="sizes-section" *ngIf="product.sizes?.length">
           <label>Size:</label>
           <div class="size-options">
             <button
-              *ngFor="let size of product?.sizes"
+              *ngFor="let size of product.sizes"
               [class.selected]="selectedSize === size"
               (click)="selectSize(size)"
               class="size-option"
@@ -101,7 +96,9 @@
             <input type="number" [value]="quantity" readonly />
             <button (click)="increaseQuantity()">+</button>
           </div>
-          <button class="buy-now-btn" (click)="buyNow()">Buy Now</button>
+          <button class="buy-now-btn" (click)="onAddToCart()">
+            Add to Cart
+          </button>
           <button
             class="wishlist-btn"
             [class.active]="isInWishlist$ | async"

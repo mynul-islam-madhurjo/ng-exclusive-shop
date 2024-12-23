@@ -8,4 +8,6 @@ export interface Product {
   category: string;
   isWishlisted?: boolean;
   addedToCart?: boolean;
+  colors?: string[];
+  sizes?: string[];
 }
