@@ -4,12 +4,11 @@
     <div class="header_filter">
       <a
         *ngFor="let category of categories"
-        [routerLink]="[category.path]"
+        (click)="selectCategory(category)"
         class="header_filter_link"
-        [class.active]="selectedCategory === category.id"
-        (click)="selectCategory(category.id)"
+        [class.active]="selectedCategory === category"
       >
-        {{ category.name }}
+        {{ category | titlecase }}
       </a>
     </div>
 
