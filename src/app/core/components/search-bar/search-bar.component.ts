@@ -32,12 +32,12 @@ export class SearchBarComponent implements OnInit {
   private handleSearch(term: string) {
     if (term.trim()) {
       this.searchStateService.setSearchTerm(term);
-      this.router.navigate(['/products'], {
+      this.router.navigate(['/products/search'], {
         queryParams: { search: term },
       });
     } else {
       this.searchStateService.clearSearch();
-      this.router.navigate(['/products']);
+      this.router.navigate(['/home']);
     }
   }
 }

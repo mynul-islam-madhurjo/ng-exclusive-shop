@@ -11,6 +11,7 @@ import { SharedModule } from '../../shared/shared.module';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProductService } from './services/prdouct.service';
+import { CoreModule } from '../../core/core.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { ProductService } from './services/prdouct.service';
     ProductsRoutingModule,
     SharedModule,
     HttpClientModule,
+    CoreModule,
   ],
   providers: [ProductService],
   exports: [
