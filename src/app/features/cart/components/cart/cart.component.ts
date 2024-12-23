@@ -11,6 +11,7 @@ import { CartItem, CartService } from '../../services/cart.service';
 export class CartComponent implements OnInit {
   cartItems$: Observable<CartItem[]>;
   cartTotal$: Observable<number>;
+  showSuccessMessage = false;
 
   constructor(
     private cartService: CartService,
@@ -37,6 +38,12 @@ export class CartComponent implements OnInit {
   }
 
   proceedToCheckout() {
-    this.router.navigate(['/checkout']);
+    this.showSuccessMessage = true;
+
+    setTimeout(() => {
+      this.showSuccessMessage = false;
+      this.cartService.clearCart();
+      this.router.navigate(['/home']);
+    }, 2000);
   }
 }
