@@ -14,13 +14,62 @@
     </ul>
     <div class="nav_items">
       <app-search-bar></app-search-bar>
-      <img src="assets/image/heart.png" alt="Wishlist" class="nav_heart" />
+      <i class="far fa-heart nav_heart"></i>
       <a [routerLink]="['/cart']" class="cart-icon-container">
-        <img src="assets/image/cart.png" alt="Cart" class="nav_cart" />
+        <i class="fas fa-shopping-cart nav_cart"></i>
         <ng-container *ngIf="cartCount$ | async as count">
           <span class="cart-count" *ngIf="count > 0">{{ count }}</span>
         </ng-container>
       </a>
+
+      <!-- Profile Section -->
+      <ng-container *ngIf="isAuthenticated$ | async; else loginButton">
+        <div class="profile-container">
+          <i class="far fa-user nav_profile" (click)="toggleProfileMenu()"></i>
+          <div class="profile-menu" *ngIf="showProfileMenu">
+            <div class="profile-header" *ngIf="currentUser$ | async as user">
+              <span>{{ user.name }}</span>
+            </div>
+            <ul class="profile-options">
+              <!--              <li>-->
+              <!--                <a [routerLink]="['/profile']">-->
+              <!--                  <i class="fas fa-user-cog"></i>-->
+              <!--                  Manage My Account-->
+              <!--                </a>-->
+              <!--              </li>-->
+              <!--              <li>-->
+              <!--                <a [routerLink]="['/orders']">-->
+              <!--                  <i class="fas fa-box"></i>-->
+              <!--                  My Order-->
+              <!--                </a>-->
+              <!--              </li>-->
+              <!--              <li>-->
+              <!--                <a [routerLink]="['/cancellations']">-->
+              <!--                  <i class="fas fa-ban"></i>-->
+              <!--                  My Cancellations-->
+              <!--                </a>-->
+              <!--              </li>-->
+              <!--              <li>-->
+              <!--                <a [routerLink]="['/reviews']">-->
+              <!--                  <i class="fas fa-star"></i>-->
+              <!--                  My Reviews-->
+              <!--                </a>-->
+              <!--              </li>-->
+              <li>
+                <a (click)="logout()" class="logout-option">
+                  <i class="fas fa-sign-out-alt"></i>
+                  Logout
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #loginButton>
+        <a [routerLink]="['/auth/login']" class="nav_link login-link">
+          <i class="fas fa-sign-in-alt"></i> Login
+        </a>
+      </ng-template>
     </div>
   </div>
 </nav>

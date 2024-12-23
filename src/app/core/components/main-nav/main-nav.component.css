@@ -23,6 +23,7 @@
 .nav_items {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
 .nav_logo {
@@ -51,22 +52,38 @@
 }
 
 .nav_heart,
-.nav_cart {
+.nav_cart,
+.nav_profile {
+  font-size: 18px;
   margin-left: 1rem;
   cursor: pointer;
-  width: 24px;
-  height: 24px;
-  transition: transform 0.2s ease;
+  color: var(--color-dark-1);
+  transition:
+    transform 0.2s ease,
+    color 0.2s ease;
 }
 
 .nav_heart:hover,
-.nav_cart:hover {
+.nav_cart:hover,
+.nav_profile:hover {
   transform: scale(1.1);
+  color: var(--color-primary);
+}
+
+.profile-options li a i {
+  width: 20px;
+  margin-right: 12px;
+  font-size: 16px;
+}
+
+.logout-option i {
+  color: var(--color-primary);
 }
 
 .cart-icon-container {
   position: relative;
   display: inline-block;
+  margin-right: 0.5rem;
 }
 
 .cart-count {
@@ -81,6 +98,89 @@
   min-width: 18px;
   text-align: center;
 }
+
+.profile-container {
+  position: relative;
+  margin-left: 1rem;
+}
+
+.nav_profile {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.nav_profile:hover {
+  transform: scale(1.1);
+}
+
+.profile-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  width: 200px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  margin-top: 10px;
+  z-index: 1000;
+}
+
+.profile-header {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--color-white-2);
+  font-weight: 500;
+}
+
+.profile-options {
+  list-style: none;
+  padding: 8px 0;
+}
+
+.profile-options li a {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  color: var(--color-dark-1);
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+}
+
+.profile-options li a:hover {
+  background-color: var(--color-white-2);
+}
+
+.profile-options li a img {
+  width: 20px;
+  height: 20px;
+  margin-right: 12px;
+}
+
+.logout-option {
+  color: var(--color-primary) !important;
+}
+
+.profile-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 999;
+}
+
+.login-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.login-link i {
+  font-size: 18px;
+}
+
 @media (max-width: 768px) {
   .nav {
     height: 14rem;
