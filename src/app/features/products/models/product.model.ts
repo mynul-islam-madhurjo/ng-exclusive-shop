@@ -2,16 +2,10 @@ export interface Product {
   id: number;
   title: string;
   price: number;
-  currentPrice: number;
-  originalPrice: number;
-  discount: number;
   image: string;
-  images?: string[];
-  rating: number;
-  ratingCount: number;
+  rating: { rate: number; count: number };
   description: string;
-  colors?: string[];
-  sizes?: string[];
-  quantity?: number;
+  category: string;
   isWishlisted?: boolean;
+  addedToCart?: boolean;
 }

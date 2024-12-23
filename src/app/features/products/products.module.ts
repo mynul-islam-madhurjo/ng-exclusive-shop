@@ -9,6 +9,8 @@ import { FlashSaleComponent } from './components/flash-sale/flash-sale.component
 import { ProductsRoutingModule } from './products-routing.module';
 import { SharedModule } from '../../shared/shared.module';
 import { ProductCardComponent } from './components/product-card/product-card.component';
+import { HttpClientModule } from '@angular/common/http';
+import { ProductService } from './services/prdouct.service';
 
 @NgModule({
   declarations: [
@@ -18,7 +20,14 @@ import { ProductCardComponent } from './components/product-card/product-card.com
     FlashSaleComponent,
     ProductCardComponent,
   ],
-  imports: [CommonModule, RouterModule, ProductsRoutingModule, SharedModule],
+  imports: [
+    CommonModule,
+    RouterModule,
+    ProductsRoutingModule,
+    SharedModule,
+    HttpClientModule,
+  ],
+  providers: [ProductService],
   exports: [
     ProductListComponent,
     ProductPageComponent,
