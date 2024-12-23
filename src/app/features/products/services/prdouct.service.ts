@@ -36,4 +36,20 @@ export class ProductService {
       .get<Product[]>(`${this.apiUrl}/category/${category}`)
       .pipe(map((products) => products.slice(startAfter, startAfter + limit)));
   }
+
+  searchProducts(searchTerm: string): Observable<Product[]> {
+    return this.http
+      .get<Product[]>(this.apiUrl)
+      .pipe(
+        map((products) =>
+          products.filter(
+            (product) =>
+              product.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+              product.description
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase()),
+          ),
+        ),
+      );
+  }
 }

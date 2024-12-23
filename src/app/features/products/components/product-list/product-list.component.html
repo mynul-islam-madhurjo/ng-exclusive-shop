@@ -21,6 +21,11 @@
       </button>
     </div>
 
+    <!-- Show search term if present -->
+    <div class="search-results" *ngIf="searchTerm">
+      <h2 class="section_title">Search Results for "{{ searchTerm }}"</h2>
+    </div>
+
     <!-- Products Grid -->
     <div class="products" *ngIf="products.length > 0">
       <div *ngFor="let product of products" class="card">
@@ -91,6 +96,11 @@
       <ng-template #allLoaded>
         <p class="all-loaded-text">No more products to load</p>
       </ng-template>
+    </div>
+    <!-- No results message -->
+    <div class="no-results" *ngIf="!loading && products.length === 0">
+      <p *ngIf="searchTerm">No products found for "{{ searchTerm }}"</p>
+      <p *ngIf="!searchTerm">No products available</p>
     </div>
   </div>
 </section>

@@ -3,6 +3,8 @@ import { CartService } from '../../../cart/services/cart.service';
 import { ProductService } from '../../services/prdouct.service';
 import { Product } from '../../models/product.model';
 import { ActivatedRoute, Router } from '@angular/router';
+import { SearchStateService } from '../../../../core/services/search-state.service';
+import { combineLatest, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-product-list',
@@ -17,17 +19,24 @@ export class ProductListComponent implements OnInit {
   productsPerLoad = 8;
   allProductsLoaded = false;
   currentCategory: string | null = null;
+  searchTerm: string = '';
 
   constructor(
     private productService: ProductService,
     private cartService: CartService,
     private router: Router,
     private route: ActivatedRoute,
+    private searchStateService: SearchStateService,
   ) {}
 
   ngOnInit() {
-    this.route.params.subscribe((params) => {
+    combineLatest([
+      this.route.params,
+      this.route.queryParams,
+      this.searchStateService.searchTerm$,
+    ]).subscribe(([params, queryParams, searchTerm]) => {
       this.currentCategory = params['category'] || null;
+      this.searchTerm = queryParams['search'] || searchTerm || '';
       this.resetAndLoadProducts();
     });
   }
@@ -45,13 +54,22 @@ export class ProductListComponent implements OnInit {
     this.loading = true;
     const startAfter = this.currentPage * this.productsPerLoad;
 
-    const productObservable = this.currentCategory
-      ? this.productService.getProductsByCategory(
-          this.currentCategory,
-          this.productsPerLoad,
-          startAfter,
-        )
-      : this.productService.getProducts(this.productsPerLoad, startAfter);
+    let productObservable: Observable<Product[]>;
+
+    if (this.searchTerm) {
+      productObservable = this.productService.searchProducts(this.searchTerm);
+    } else if (this.currentCategory) {
+      productObservable = this.productService.getProductsByCategory(
+        this.currentCategory,
+        this.productsPerLoad,
+        startAfter,
+      );
+    } else {
+      productObservable = this.productService.getProducts(
+        this.productsPerLoad,
+        startAfter,
+      );
+    }
 
     productObservable.subscribe({
       next: (newProducts) => {

@@ -231,6 +231,22 @@
   opacity: 0.9;
 }
 
+.search-results {
+  margin-bottom: 2rem;
+}
+
+.search-results h2 {
+  color: var(--color-dark-1);
+  font-size: 2rem;
+}
+
+.no-results {
+  text-align: center;
+  padding: 4rem;
+  color: var(--color-dark-2);
+  font-size: 1.6rem;
+}
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .section {
