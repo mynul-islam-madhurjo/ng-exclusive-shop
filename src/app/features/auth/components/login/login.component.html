@@ -1,0 +1,61 @@
+<div *ngIf="errorMessage" class="toast-message">
+  {{ errorMessage }}
+</div>
+<div class="login-container">
+  <h1 class="login-title">Log in to Exclusive</h1>
+  <p class="login-subtitle">Enter your details below</p>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <div class="form-field">
+      <input
+        type="email"
+        formControlName="email"
+        placeholder="Email or Phone Number"
+        [class.error]="
+          loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+        "
+      />
+      <div
+        class="error-message"
+        *ngIf="
+          loginForm.get('email')?.invalid && loginForm.get('email')?.touched
+        "
+      >
+        Please enter a valid email
+      </div>
+    </div>
+
+    <div class="form-field">
+      <input
+        type="password"
+        formControlName="password"
+        placeholder="Password"
+        [class.error]="
+          loginForm.get('password')?.invalid &&
+          loginForm.get('password')?.touched
+        "
+      />
+      <div
+        class="error-message"
+        *ngIf="
+          loginForm.get('password')?.invalid &&
+          loginForm.get('password')?.touched
+        "
+      >
+        Password is required
+      </div>
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="login-button" [disabled]="isLoading">
+        {{ isLoading ? "Logging in..." : "Log In" }}
+      </button>
+      <a href="javascript:void(0)" class="forgot-password">Forgot Password?</a>
+    </div>
+
+    <p class="register-link">
+      Don't have an account?
+      <a routerLink="/auth/register">Create Account</a>
+    </p>
+  </form>
+</div>
