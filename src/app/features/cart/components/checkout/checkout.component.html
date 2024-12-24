@@ -1,0 +1,179 @@
+<section class="checkout-section">
+  <div class="container">
+    <div *ngIf="showSuccessMessage" class="success-message">
+      Order placed successfully!
+    </div>
+
+    <div class="checkout-content">
+      <!-- Billing Details Form -->
+      <div class="billing-details">
+        <h2>Billing Details</h2>
+        <form [formGroup]="checkoutForm" class="billing-form">
+          <div class="form-group">
+            <label>First Name<span class="required">*</span></label>
+            <input type="text" formControlName="firstName" />
+            <div
+              class="error-message"
+              *ngIf="
+                checkoutForm.get('firstName')?.invalid &&
+                checkoutForm.get('firstName')?.touched
+              "
+            >
+              First Name is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Company Name</label>
+            <input type="text" formControlName="companyName" />
+          </div>
+
+          <div class="form-group">
+            <label>Street Address<span class="required">*</span></label>
+            <input type="text" formControlName="streetAddress" />
+            <div
+              class="error-message"
+              *ngIf="
+                checkoutForm.get('streetAddress')?.invalid &&
+                checkoutForm.get('streetAddress')?.touched
+              "
+            >
+              Street Address is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Apartment, floor, etc. (optional)</label>
+            <input type="text" formControlName="apartment" />
+          </div>
+
+          <div class="form-group">
+            <label>Town/City<span class="required">*</span></label>
+            <input type="text" formControlName="town" />
+            <div
+              class="error-message"
+              *ngIf="
+                checkoutForm.get('town')?.invalid &&
+                checkoutForm.get('town')?.touched
+              "
+            >
+              Town/City is required
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Phone Number<span class="required">*</span></label>
+            <input type="tel" formControlName="phone" />
+            <div
+              class="error-message"
+              *ngIf="
+                checkoutForm.get('phone')?.invalid &&
+                checkoutForm.get('phone')?.touched
+              "
+            >
+              Please enter a valid phone number
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Email Address<span class="required">*</span></label>
+            <input type="email" formControlName="email" />
+            <div
+              class="error-message"
+              *ngIf="
+                checkoutForm.get('email')?.invalid &&
+                checkoutForm.get('email')?.touched
+              "
+            >
+              Please enter a valid email address
+            </div>
+          </div>
+
+          <div class="form-group checkbox">
+            <input type="checkbox" formControlName="saveInfo" id="saveInfo" />
+            <label for="saveInfo"
+              >Save this information for faster check-out next time</label
+            >
+          </div>
+        </form>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="order-summary">
+        <h2>Order Summary</h2>
+        <div class="order-items">
+          <div class="order-item" *ngFor="let item of cartItems$ | async">
+            <img [src]="item.image" [alt]="item.title" />
+            <div class="item-details">
+              <h3>{{ item.title }}</h3>
+              <p>${{ item.price }} x {{ item.quantity }}</p>
+            </div>
+            <span class="item-total">${{ item.price * item.quantity }}</span>
+          </div>
+        </div>
+
+        <div class="summary-totals">
+          <div class="summary-row">
+            <span>Subtotal:</span>
+            <span>{{ cartTotal$ | async | currency }}</span>
+          </div>
+          <div class="summary-row">
+            <span>Shipping:</span>
+            <span>Free</span>
+          </div>
+          <div class="summary-row total">
+            <span>Total:</span>
+            <span>{{ cartTotal$ | async | currency }}</span>
+          </div>
+        </div>
+
+        <!-- Payment Method -->
+        <div class="payment-method">
+          <div class="radio-group">
+            <input
+              type="radio"
+              id="bank"
+              name="payment"
+              [(ngModel)]="paymentMethod"
+              value="bank"
+            />
+            <label for="bank">Bank</label>
+            <div class="card-icons" *ngIf="paymentMethod === 'bank'">
+              <i class="fab fa-cc-visa"></i>
+              <i class="fab fa-cc-mastercard"></i>
+              <!-- Add more card icons -->
+            </div>
+          </div>
+          <div class="radio-group">
+            <input
+              type="radio"
+              id="cash"
+              name="payment"
+              [(ngModel)]="paymentMethod"
+              value="cash"
+            />
+            <label for="cash">Cash on Delivery</label>
+          </div>
+        </div>
+
+        <!-- Coupon Code -->
+        <div class="coupon-section">
+          <input
+            type="text"
+            formControlName="couponCode"
+            placeholder="Coupon Code"
+          />
+          <button (click)="applyCoupon()">Apply Coupon</button>
+        </div>
+
+        <button
+          class="place-order-btn"
+          (click)="placeOrder()"
+          [disabled]="checkoutForm.invalid"
+        >
+          Place Order
+        </button>
+      </div>
+    </div>
+  </div>
+</section>

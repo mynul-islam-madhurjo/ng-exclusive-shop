@@ -38,12 +38,6 @@ export class CartComponent implements OnInit {
   }
 
   proceedToCheckout() {
-    this.showSuccessMessage = true;
-
-    setTimeout(() => {
-      this.showSuccessMessage = false;
-      this.cartService.clearCart();
-      this.router.navigate(['/home']);
-    }, 2000);
+    this.router.navigate(['/cart/checkout']);
   }
 }
