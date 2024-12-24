@@ -23,12 +23,12 @@
       <span class="original-price">${{ product.originalPrice }}</span>
     </div>
     <div class="rating">
-      <div class="stars">
+      <div class="card_stars">
         <ng-container *ngFor="let star of [1, 2, 3, 4, 5]">
           <i
+            class="fa-star"
             [class.fa-solid]="star <= product.rating"
             [class.fa-regular]="star > product.rating"
-            class="fa-star"
           ></i>
         </ng-container>
       </div>
